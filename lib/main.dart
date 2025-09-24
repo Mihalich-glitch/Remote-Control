@@ -9,10 +9,60 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      theme: ThemeData(
+        //primarySwatch: Colors.blue, // Основной цвет
+        primaryColor: Colors.green, // Основной цвет
+        //Color: Colors.green,
+        // colorScheme: ColorScheme.fromSwatch(
+        //   primarySwatch: Colors.blue, // Цветовая схема
+        // ),
+      ),
       home: Scaffold(
+        appBar: AppBar(
+          title: Text('Remote Control'),
+          leading: IconButton(
+            onPressed: () {
+              print("нажата кнопка меню!");
+            },
+            icon: Icon(Icons.menu),
+          ),
+          //backgroundColor: Colors.teal,
+          //elevation: 4.0,
+        ),
         body: Center(
-          child: Text('Hello World!'),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              IconButton(
+                onPressed: () {
+                  print("нажата кнопка влево!");
+                },
+                icon: Icon(Icons.arrow_forward_ios, size: 220),
+                style: IconButton.styleFrom(
+                  // backgroundColor: Colors.teal,
+                  // foregroundColor: Colors.white,
+                  padding: EdgeInsets.all(16),
+                  // alignment: Alignment.center,
+                ),
+              ),
+
+              SizedBox(height: 20),
+
+              IconButton(
+                onPressed: () {
+                  print("нажата кнопка вправо!");
+                },
+                icon: Icon(Icons.arrow_back_ios_outlined, size: 100),
+                style: IconButton.styleFrom(
+                  backgroundColor: Colors.teal,
+                  foregroundColor: Colors.white,
+                  padding: EdgeInsets.all(16),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
