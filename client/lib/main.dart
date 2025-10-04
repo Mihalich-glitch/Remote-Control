@@ -1,11 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 
 void main() {
   runApp(const MainApp());
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
   const MainApp({super.key});
+
+  @override
+  State<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> {
+  //Добавление WebSocket канала
+  final channel = WebSocketChannel.connect(Uri.parse('wss://echo.websocket.org'));
+
+  @override
+  void dispose() {
+    channel.sink.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +68,8 @@ class MainApp extends StatelessWidget {
               IconButton(
                 onPressed: () {
                   print("нажата кнопка вправо!");
+                  channel.sink.add('right');
+                  
                 },
                 icon: Icon(Icons.arrow_back_ios_outlined, size: 100),
                 style: IconButton.styleFrom(
